@@ -55,7 +55,14 @@ in
 
   runtimePkgs = with pkgs; [
     bat
-    fd 
+    fd
     ripgrep
   ];
+
+  fishIntegration.abbreviations = {
+    tvc = "tv channels";
+    tvj = "tv journal";
+    tvn = "tv nix-search-tv";
+    tvt = "tv text";
+  };
 }

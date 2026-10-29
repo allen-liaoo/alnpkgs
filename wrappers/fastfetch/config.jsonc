@@ -1,0 +1,165 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "padding": {
+      "top": 4,
+      "right": 5
+    },
+    "height": 14
+  },
+  "display": {
+    "separator": " ▸ " // :
+  },
+"modules": [
+  {
+    "type": "title"
+  },
+"break",
+{
+  "type": "custom",
+  "format": "\u001b[90m┌────────────────────── Operating System ──────────────────────┐"
+},
+{
+  "type": "os",
+  "key": "󰨡 OS",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "kernel",
+  "key": "│ Kernel  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "bios",
+  "key": "│ BIOS  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "initsystem",
+  "key": "│ Init ⚡︎ ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "packages",
+  "key": "│ Packages  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "shell",
+  "key": "│ Shell  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "lm",
+  "key": "│ DM 󰌾 ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "de",
+  "key": "│ DE  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "wm",
+  "key": "│ WM  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "wmtheme",
+  "key": "│ Theme 󰃣 ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "terminalfont",
+  "key": "│ Font  ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "icons",
+  "key": "│ Icons ⓘ ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "cursor",
+  "key": "└ Cursor ➤ ",
+  "keyColor": "#FFC0CB"
+},
+{
+  "type": "custom",
+  "format": "\u001b[90m├────────────────────── Device ────────────────────────────────┤"
+},
+{
+  "type": "host",
+  "format": "{vendor} {name} ({version})",
+  "key": "󰟀 Host",
+  "keyColor": "yellow"
+},
+{
+  "type": "cpu",
+  "key": "│ CPU 󰍛 ",
+  "keyColor": "yellow"
+},
+{
+  "type": "gpu",
+  "key": "│ GPU 󰢮 ",
+  "keyColor": "yellow"
+},
+{
+  "type": "memory",
+  "key": "│ RAM  ",
+  "keyColor": "yellow"
+},
+{
+  "type": "swap",
+  "key": "│ Swap 󰾴",
+  "keyColor": "yellow"
+},
+{
+  "type": "disk",
+  "key": "│ Storage  ",
+  "keyColor": "yellow"
+},
+{
+  "type": "battery",
+  "key": "| Battery 󰁹 ",
+  "keyColor": "yellow"
+},
+{
+  "type": "display",
+  "key": "| Display 모",
+  "keyColor": "yellow"
+},
+{
+  "type": "uptime",
+  "key": "└ Uptime  ",
+  "keyColor": "yellow"
+},
+{
+  "type": "custom",
+  "format": "\u001b[90m├────────────────────── Others Configurations ─────────────────┤"
+},
+{
+  "type": "terminal",
+  "key": "  Terminal",
+  "keyColor": "cyan"
+},
+{
+  "type": "editor",
+  "key": "│ Editor  ",
+  "keyColor": "cyan"
+},
+{
+  "type": "custom",
+  "format": "\u001b[90m└──────────────────────────────────────────────────────────────┘"
+},
+{
+  "type": "colors",
+  "paddingLeft": 24,
+  "symbol": "circle",
+  "block": {
+    "width": 10
+  }
+},
+"break",
+]
+}

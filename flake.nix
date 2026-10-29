@@ -15,8 +15,12 @@
             config.allowUnfree = true;
           };
           lib = pkgs.lib;
+          # fixpoint: packages can reference each other through alnPkgs
+          alnPkgs =
+            (import ./wrappers { inherit wrappers pkgs lib alnPkgs; })
+            // (import ./pkgs { inherit pkgs lib; });
         in
-        (import ./wrappers { inherit wrappers pkgs lib; }) // (import ./pkgs { inherit pkgs lib; })
+        alnPkgs
       );
     in
     {
