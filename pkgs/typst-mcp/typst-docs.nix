@@ -14,7 +14,8 @@ rustPlatform.buildRustPackage {
   cargoLock = {
     lockFile = "${typst.src}/Cargo.lock";
     outputHashes = {
-      "typst-dev-assets-0.14.2" = "sha256-mRkQXg1YG0qqcTVtgpQpvKw54RM9FBo1EgM2WJFbQAI=";
+      # typst-dev-assets is versioned with typst; update the hash when typst is bumped
+      "typst-dev-assets-${typst.version}" = "sha256-1ICmdrTcC2v5MdONrrvWetCExHe9nYYwqghRCrM5lOs=";
     };
   };
 
