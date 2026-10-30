@@ -4,7 +4,9 @@
       self,
       nixpkgs,
       wrappers,
-    }:
+      nix-index-database,
+      ...
+    }@inputs:
     let
       forAllSystems = with nixpkgs.lib; genAttrs platforms.all;
       pkgsPerSystem = (
@@ -17,8 +19,19 @@
           lib = pkgs.lib;
           # fixpoint: packages can reference each other through alnPkgs
           alnPkgs =
-            (import ./wrappers { inherit wrappers pkgs lib alnPkgs; })
-            // (import ./pkgs { inherit pkgs lib; });
+            (import ./wrappers {
+              inherit
+                wrappers
+                pkgs
+                lib
+                alnPkgs
+                inputs
+                ;
+            })
+            // (import ./pkgs { inherit pkgs lib; })
+            // {
+              comma = nix-index-database.packages.${system}.comma-with-db;
+            };
         in
         alnPkgs
       );
@@ -48,6 +61,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     wrappers = {
       url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvimx = {
+      url = "github:allen-liaoo/nvimx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

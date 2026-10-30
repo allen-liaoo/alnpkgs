@@ -60,11 +60,20 @@ in
           lt = "eza --tree";
         };
         just.abbreviations.js = "just";
+        nvimx.env = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+        };
+        nvimx.shellAliases = {
+          v = "nvim";
+          vi = "nvim";
+          vim = "nvim";
+        };
         nix-your-shell.interactiveInit = "${lib.getExe config.tools.nix-your-shell} fish | source";
       }
 
       # a tool set to null turns its integration off; integrations for programs
-      # outside `tools` (e.g. git from home-manager) stay on
+      # outside `tools` (e.g. ones from home-manager) stay on
       (lib.genAttrs (lib.attrNames config.tools) (n: {
         enable = lib.mkDefault (config.tools.${n} != null);
       }))
