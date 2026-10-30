@@ -22,6 +22,22 @@
         "type": "github"
       }
     },
+    "matugen-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777401100,
+        "narHash": "sha256-J5bAD07kF1a7BAWzzIGSsQKns4rBWb1tK606Bh0pR00=",
+        "owner": "daedlock",
+        "repo": "matugen.nvim",
+        "rev": "835a2f4c7b32e5e0fa57f3595a04a638ff74d8bc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "daedlock",
+        "repo": "matugen.nvim",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -83,6 +99,7 @@
     },
     "nvimx": {
       "inputs": {
+        "matugen-nvim": "matugen-nvim",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -90,11 +107,11 @@
         "winresize": "winresize"
       },
       "locked": {
-        "lastModified": 1793212776,
-        "narHash": "sha256-dnGaeqgkPS5+iK0MlExwFEEqBBznZbpVi0NWVM0MJpI=",
+        "lastModified": 1793402476,
+        "narHash": "sha256-CHUkeQ5MJr+h2JS+ml3OwNuVcYhvNSUTOMDgjV652bk=",
         "owner": "allen-liaoo",
         "repo": "nvimx",
-        "rev": "937dab7d04da526d451fe35c24f49b2c3801931e",
+        "rev": "0d35c397cf26ea54ac9c233e30a239fd3cb46687",
         "type": "github"
       },
       "original": {
