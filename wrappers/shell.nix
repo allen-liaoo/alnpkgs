@@ -27,6 +27,7 @@ in
       direnv
       television
       delta
+      eza
       comma
       ;
     inherit nvimx;
@@ -36,7 +37,6 @@ in
       fzf
       ripgrep
       just
-      eza
       nix-your-shell
       claude-code
       ;

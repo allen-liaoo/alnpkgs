@@ -50,15 +50,6 @@ in
       # plain packages have no fishIntegration, so declare theirs here
       {
         bat.shellAliases.cat = "bat";
-        eza.shellAliases = {
-          l = "eza";
-          ls = "eza";
-        };
-        eza.abbreviations = {
-          ll = "eza -l";
-          la = "eza -lah";
-          lt = "eza --tree";
-        };
         just.abbreviations.js = "just";
         nvimx.env = {
           EDITOR = "nvim";
