@@ -24,7 +24,7 @@ in
       '';
     };
     integrations = lib.mkOption {
-      type = with lib.types; attrsOf (submodule ../lib/fish-integration-type.nix);
+      type = with lib.types; attrsOf (submodule ./fish-integration-type.nix);
       default = { };
       description = ''
         Fish integrations keyed by program name. Defaults to each tool's
