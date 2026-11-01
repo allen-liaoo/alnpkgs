@@ -41,6 +41,7 @@
     plugins = with pkgs.tmuxPlugins; [
       yank # yank to system clipboard
       resurrect
+      mode-indicator # PREFIX / COPY / SYNC / NORMAL in status
     ]
     ++ lib.optional (lib.isDerivation config.theme) config.theme;
 
@@ -70,20 +71,31 @@
       set -g @accent cyan
       set -g @session blue
       set -g @alert yellow
+      set -g @normal green
+
       set -g @nord_tmux_show_status_content 0 # nord: colours only, skip its layout
 
       setw -g monitor-activity on
+      set -g status-left-length 20
       set -g status-right-length 80
       set -g window-status-separator ""
 
-      set -g status-left "#[fg=#{@bar_bg},bg=#{@session},bold] #S #[fg=#{@session},bg=#{@bar_bg},nobold]"
+      # mode-indicator: precedence is prefix > any pane mode > synchronized panes > normal
+      set -g @mode_indicator_prefix_prompt " PREFIX "
+      set -g @mode_indicator_copy_prompt " COPY "
+      set -g @mode_indicator_sync_prompt " SYNC "
+      set -g @mode_indicator_empty_prompt " NORMAL "
+      set -g @mode_indicator_prefix_mode_style "fg=#{@bar_bg},bg=#{@accent},bold"
+      set -g @mode_indicator_copy_mode_style "fg=#{@bar_bg},bg=#{@alert},bold"
+      set -g @mode_indicator_sync_mode_style "fg=#{@bar_bg},bg=#{@alert},bold"
+      set -g @mode_indicator_empty_mode_style "fg=#{@bar_bg},bg=#{@normal},bold"
+      set -g @mode_color "#{?client_prefix,#{@accent},#{?pane_in_mode,#{@alert},#{?pane_synchronized,#{@alert},#{@normal}}}}"
+      set -g status-left "#{tmux_mode_indicator}#[fg=#{E:@mode_color},bg=#{@bar_bg}]"
 
-      # unattached sessions (attached ones are visible in their own terminals), then mode indicators
+      # unattached sessions (attached ones are visible in their own terminals), then the current session
       set -g status-right "\
       #[fg=#{@muted}]#{S:#{?session_attached,,#{session_name} }}\
-      #{?pane_synchronized,#[fg=#{@bar_bg}#,bg=#{@alert}#,bold] SYNC ,}\
-      #{?#{==:#{pane_mode},copy-mode},#[fg=#{@bar_bg}#,bg=#{@alert}#,bold] COPY ,}\
-      #{?client_prefix,#[fg=#{@bar_bg}#,bg=#{@accent}#,bold] PREFIX ,}"
+      #[fg=#{@session}]#[fg=#{@bar_bg},bg=#{@session},bold] #S "
 
       # windows with activity or a bell get alert-coloured text
       set -g window-status-format "\
