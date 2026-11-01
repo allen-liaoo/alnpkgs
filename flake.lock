@@ -90,11 +90,11 @@
         "winresize": "winresize"
       },
       "locked": {
-        "lastModified": 1793469001,
-        "narHash": "sha256-nB7CBzESIBDf8l7bbc55kk/jbNSYxFbBGmJUZvT+DxY=",
+        "lastModified": 1793568577,
+        "narHash": "sha256-VTN9dMgeFM3HWZI0xZDbez3iv5U9atfFxVnrnHORL2I=",
         "owner": "allen-liaoo",
         "repo": "nvimx",
-        "rev": "21cc2b5fadb0597af892437bd5db9e75a316011e",
+        "rev": "f8d3eb921745385740be4619c0977c8513797bd7",
         "type": "github"
       },
       "original": {

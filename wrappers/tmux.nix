@@ -62,6 +62,38 @@
       bind -r K resize-pane -U 5
       bind -r L resize-pane -R 5
 
+      # status line: layout lives here, colours are named so a theme only sets these (terminal palette names)
+      set -g @bar_bg black
+      set -g @bar_fg white
+      set -g @muted brightblack
+      set -g @accent cyan
+      set -g @session blue
+      set -g @alert yellow
+      set -g @nord_tmux_show_status_content 0 # nord: colours only, skip its layout
+
+      setw -g monitor-activity on
+      set -g status-right-length 80
+      set -g window-status-separator ""
+
+      set -g status-left "#[fg=#{@bar_bg},bg=#{@session},bold] #S #[fg=#{@session},bg=#{@bar_bg},nobold]"
+
+      # unattached sessions (attached ones are visible in their own terminals), then mode indicators
+      set -g status-right "\
+      #[fg=#{@muted}]#{S:#{?session_attached,,#{session_name} }}\
+      #{?pane_synchronized,#[fg=#{@bar_bg}#,bg=#{@alert}#,bold] SYNC ,}\
+      #{?#{==:#{pane_mode},copy-mode},#[fg=#{@bar_bg}#,bg=#{@alert}#,bold] COPY ,}\
+      #{?client_prefix,#[fg=#{@bar_bg}#,bg=#{@accent}#,bold] PREFIX ,}"
+
+      # windows with activity or a bell get alert-coloured text
+      set -g window-status-format "\
+      #[fg=#{@bar_bg},bg=#{@muted}]\
+      #[fg=#{?#{||:#{window_activity_flag},#{window_bell_flag}},#{@alert},#{@bar_fg}}] #I #W #F \
+      #[fg=#{@muted},bg=#{@bar_bg}]"
+      set -g window-status-current-format "\
+      #[fg=#{@bar_bg},bg=#{@accent}]\
+      #[fg=#{@bar_bg}] #I #W #F \
+      #[fg=#{@accent},bg=#{@bar_bg}]"
+
       # sensible's R reloads ~/.tmux.conf; reload the packaged config instead
       bind R source-file ${config.constructFiles.generatedConfig.path} \; display "Reloaded tmux config"
     '';
