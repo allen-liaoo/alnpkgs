@@ -38,8 +38,9 @@
       ]
     ];
 
-    plugins = [
-      pkgs.tmuxPlugins.yank # yank to system clipboard
+    plugins = with pkgs.tmuxPlugins; [
+      yank # yank to system clipboard
+      resurrect
     ]
     ++ lib.optional (lib.isDerivation config.theme) config.theme;
 
