@@ -17,7 +17,7 @@
 
   config = {
     sourceSensible = true;
-    prefix = "C-Space";
+    prefix = "C-a";
     terminal = "tmux-256color";
     terminalOverrides = ",*:RGB"; # outer terminal supports truecolor
     escapeTime = 0;
