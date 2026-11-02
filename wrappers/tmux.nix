@@ -49,6 +49,11 @@
       set -g renumber-windows on
       set -g set-clipboard on
 
+      # pass modified keys (e.g. C-S-h) through to apps as CSI u instead of collapsing them to C-h
+      set -s extended-keys on
+      set -s extended-keys-format csi-u
+      set -as terminal-features ',*alacritty*:extkeys'
+
       # splits and new windows keep the current directory
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
@@ -97,15 +102,17 @@
       #[fg=#{@muted}]#{S:#{?session_attached,,#{session_name} }}\
       #[fg=#{@session}]#[fg=#{@bar_bg},bg=#{@session},bold] #S "
 
-      # windows with activity or a bell get alert-coloured text
+      # windows with activity or a bell get alert-coloured text.
+      # window-status-{current,activity,bell}-style (underscore/reverse by default) apply to the whole
+      # entry and would invert the separators, so every segment clears attributes with `none`
       set -g window-status-format "\
-      #[fg=#{@bar_bg},bg=#{@muted}]\
-      #[fg=#{?#{||:#{window_activity_flag},#{window_bell_flag}},#{@alert},#{@bar_fg}}] #I #W #F \
-      #[fg=#{@muted},bg=#{@bar_bg}]"
+      #[none,fg=#{@bar_bg},bg=#{@muted}]\
+      #[none,fg=#{?#{||:#{window_activity_flag},#{window_bell_flag}},#{@alert},#{@bar_fg}}] #I #W #F \
+      #[none,fg=#{@muted},bg=#{@bar_bg}]"
       set -g window-status-current-format "\
-      #[fg=#{@bar_bg},bg=#{@accent}]\
-      #[fg=#{@bar_bg}] #I #W #F \
-      #[fg=#{@accent},bg=#{@bar_bg}]"
+      #[none,fg=#{@bar_bg},bg=#{@accent}]\
+      #[none,fg=#{@bar_bg}] #I #W #F \
+      #[none,fg=#{@accent},bg=#{@bar_bg}]"
 
       # sensible's R reloads ~/.tmux.conf; reload the packaged config instead
       bind R source-file ${config.constructFiles.generatedConfig.path} \; display "Reloaded tmux config"
