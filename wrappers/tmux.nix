@@ -59,18 +59,21 @@
       bind - split-window -v -c "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
 
-      # vim-like pane navigation and resizing
-      bind h select-pane -L
+      # vim-like pane navigation; h/l fall through to the adjacent window at the edge, H/L always switch window
+      bind h if -F "#{pane_at_left}" previous-window "select-pane -L"
       bind j select-pane -D
       bind k select-pane -U
-      bind l select-pane -R
-      bind -r H resize-pane -L 5
-      bind -r J resize-pane -D 5
-      bind -r K resize-pane -U 5
-      bind -r L resize-pane -R 5
+      bind l if -F "#{pane_at_right}" next-window "select-pane -R"
+      bind H previous-window
+      bind L next-window
+      bind -r M-h resize-pane -L 5
+      bind -r M-j resize-pane -D 5
+      bind -r M-k resize-pane -U 5
+      bind -r M-l resize-pane -R 5
 
       # status line: layout lives here, colours are named so a theme only sets these (terminal palette names)
-      set -g @bar_bg black
+      set -g @bar_bg default # transparent bar
+      set -g @bar_text black # text on coloured segments
       set -g @bar_fg white
       set -g @muted brightblack
       set -g @accent cyan
@@ -90,36 +93,42 @@
       set -g @mode_indicator_copy_prompt " COPY "
       set -g @mode_indicator_sync_prompt " SYNC "
       set -g @mode_indicator_empty_prompt " NORMAL "
-      set -g @mode_indicator_prefix_mode_style "fg=#{@bar_bg},bg=#{@accent},bold"
-      set -g @mode_indicator_copy_mode_style "fg=#{@bar_bg},bg=#{@alert},bold"
-      set -g @mode_indicator_sync_mode_style "fg=#{@bar_bg},bg=#{@alert},bold"
-      set -g @mode_indicator_empty_mode_style "fg=#{@bar_bg},bg=#{@normal},bold"
+      set -g @mode_indicator_prefix_mode_style "fg=#{@bar_text},bg=#{@accent},bold"
+      set -g @mode_indicator_copy_mode_style "fg=#{@bar_text},bg=#{@alert},bold"
+      set -g @mode_indicator_sync_mode_style "fg=#{@bar_text},bg=#{@alert},bold"
+      set -g @mode_indicator_empty_mode_style "fg=#{@bar_text},bg=#{@normal},bold"
       set -g @mode_color "#{?client_prefix,#{@accent},#{?pane_in_mode,#{@alert},#{?pane_synchronized,#{@alert},#{@normal}}}}"
       set -g status-left "#{tmux_mode_indicator}#[fg=#{E:@mode_color},bg=#{@bar_bg}]"
 
       # unattached sessions (attached ones are visible in their own terminals), then the current session
       set -g status-right "\
       #[fg=#{@muted}]#{S:#{?session_attached,,#{session_name} }}\
-      #[fg=#{@session}]#[fg=#{@bar_bg},bg=#{@session},bold] #S "
+      #[fg=#{@session}]#[fg=#{@bar_text},bg=#{@session},bold] #S "
 
       # windows with activity or a bell get alert-coloured text.
       # window-status-{current,activity,bell}-style (underscore/reverse by default) apply to the whole
-      # entry and would invert the separators, so every segment clears attributes with `none`
+      # entry and would invert the separators, so every segment clears attributes with `none`.
+      # the bar is transparent, so each leading notch is the inverse divider in the segment colour
       set -g window-status-format "\
-      #[none,fg=#{@bar_bg},bg=#{@muted}]\
-      #[none,fg=#{?#{||:#{window_activity_flag},#{window_bell_flag}},#{@alert},#{@bar_fg}}] #I #W #F \
+      #[none,fg=#{@muted},bg=#{@bar_bg}]\
+      #[none,fg=#{?#{||:#{window_activity_flag},#{window_bell_flag}},#{@alert},#{@bar_fg}},bg=#{@muted}] #I #W #F \
       #[none,fg=#{@muted},bg=#{@bar_bg}]"
       set -g window-status-current-format "\
-      #[none,fg=#{@bar_bg},bg=#{@accent}]\
-      #[none,fg=#{@bar_bg}] #I #W #F \
+      #[none,fg=#{@accent},bg=#{@bar_bg}]\
+      #[none,fg=#{@bar_text},bg=#{@accent}] #I #W #F \
       #[none,fg=#{@accent},bg=#{@bar_bg}]"
 
       # sensible's R reloads ~/.tmux.conf; reload the packaged config instead
       bind R source-file ${config.constructFiles.generatedConfig.path} \; display "Reloaded tmux config"
     '';
 
-    configAfter = lib.optionalString (!lib.isDerivation config.theme) ''
-      source-file -q "${config.theme}"
-    '';
+    configAfter =
+      lib.optionalString (!lib.isDerivation config.theme) ''
+        source-file -q "${config.theme}"
+      ''
+      + ''
+        # themes set a bar background; keep it transparent.
+        set -gF status-style "bg=default,fg=#{@bar_fg}"
+      '';
   };
 }
