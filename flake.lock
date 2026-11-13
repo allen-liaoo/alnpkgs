@@ -1,5 +1,29 @@
 {
   "nodes": {
+    "coil-nvim": {
+      "inputs": {
+        "nixpkgs": [
+          "nvimx",
+          "nixpkgs"
+        ],
+        "nvimx": [
+          "nvimx"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794672509,
+        "narHash": "sha256-LtwKbc35LAGWXUG/tuOvcGvkznmqq9T4H6KCJlWi0Rs=",
+        "owner": "allen-liaoo",
+        "repo": "coil.nvim",
+        "rev": "fe147c557d3afc7fc5b443aa71ef6f0568c32490",
+        "type": "github"
+      },
+      "original": {
+        "owner": "allen-liaoo",
+        "repo": "coil.nvim",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -83,6 +107,7 @@
     },
     "nvimx": {
       "inputs": {
+        "coil-nvim": "coil-nvim",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -90,11 +115,11 @@
         "winresize": "winresize"
       },
       "locked": {
-        "lastModified": 1793568577,
-        "narHash": "sha256-VTN9dMgeFM3HWZI0xZDbez3iv5U9atfFxVnrnHORL2I=",
+        "lastModified": 1794673021,
+        "narHash": "sha256-C3PkgIoC5YzyQovoL32k7tQ+PPEbeJfWT4LeLXYGf98=",
         "owner": "allen-liaoo",
         "repo": "nvimx",
-        "rev": "f8d3eb921745385740be4619c0977c8513797bd7",
+        "rev": "77a025734aa59e9a05f8bf43b8ee42920a814553",
         "type": "github"
       },
       "original": {

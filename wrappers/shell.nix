@@ -10,6 +10,7 @@ let
     nvimx.treesitter.enableAllGrammars = true;
     nvimx.preset.nix.enable = true;
     nvimx.preset.shells.enable = true;
+    plugins.coil.images.enable = true;
   };
 in
 {
@@ -19,7 +20,7 @@ in
   tools = lib.mapAttrs (_: lib.mkDefault) {
     inherit (alnPkgs)
       starship
-      yazi
+      yazi # TODO: remove
       fastfetch
       btop
       lazygit

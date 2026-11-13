@@ -49,6 +49,12 @@
       set -g renumber-windows on
       set -g set-clipboard on
 
+      # image.nvim (coil's image previews): let the kitty graphics protocol through to the terminal,
+      # and track pane focus and window switches so images show only where they belong
+      set -gq allow-passthrough on
+      set -g visual-activity off
+      set -g focus-events on
+
       # pass modified keys (e.g. C-S-h) through to apps as CSI u instead of collapsing them to C-h
       set -s extended-keys on
       set -s extended-keys-format csi-u

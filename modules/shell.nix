@@ -56,10 +56,24 @@ in
           VISUAL = "nvim";
         };
         nvimx.shellAliases = {
-          v = "nvim";
-          vi = "nvim";
-          vim = "nvim";
+          v = lib.getExe config.tools.nvimx;
+          vi = lib.getExe config.tools.nvimx;
+          vim = lib.getExe config.tools.nvimx;
+          # nvimx as a file manager (coil's standalone mode)
+          coil = "${lib.getExe config.tools.nvimx} --cmd 'let g:coil_standalone = 1'";
         };
+        # coil, then cd to its last directory on exit
+        nvimx.init = ''
+          function cl
+            set tmp (mktemp -t "coil-cwd.XXXXXX")
+            ${lib.getExe config.tools.nvimx} --cmd "let g:coil_standalone = 1" \
+              --cmd "let g:coil_cwd_file = '$tmp'" $argv
+            if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+              builtin cd -- "$cwd"
+            end
+            rm -f -- "$tmp"
+          end
+        '';
         nix-your-shell.interactiveInit = "${lib.getExe config.tools.nix-your-shell} fish | source";
       }
 
