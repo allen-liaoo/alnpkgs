@@ -39,6 +39,19 @@
     {
       packages = forAllSystems pkgsPerSystem;
       legacyPackages = forAllSystems pkgsPerSystem;
+      # `nix develop` drops into the wrapped shell
+      devShells = forAllSystems (
+        system:
+        let
+          shell = (pkgsPerSystem system).shell;
+        in
+        {
+          default = nixpkgs.legacyPackages.${system}.mkShell {
+            # only when interactive, so `nix develop -c <cmd>` still runs <cmd>
+            shellHook = ''[[ $- == *i* ]] && exec ${nixpkgs.lib.getExe shell}'';
+          };
+        }
+      );
       apps = forAllSystems (
         system:
         (
