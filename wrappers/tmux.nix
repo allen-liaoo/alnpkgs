@@ -49,7 +49,7 @@
       set -g renumber-windows on
       set -g set-clipboard on
 
-      # image.nvim (coil's image previews): let the kitty graphics protocol through to the terminal,
+      # let the kitty graphics protocol through to the terminal,
       # and track pane focus and window switches so images show only where they belong
       set -gq allow-passthrough on
       set -g visual-activity off

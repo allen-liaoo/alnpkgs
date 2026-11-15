@@ -39,7 +39,7 @@
     {
       packages = forAllSystems pkgsPerSystem;
       legacyPackages = forAllSystems pkgsPerSystem;
-      # `nix develop` drops into the wrapped shell
+      # add tools bundled in wrapped shell to dev env
       devShells = forAllSystems (
         system:
         let
@@ -47,8 +47,10 @@
         in
         {
           default = nixpkgs.legacyPackages.${system}.mkShell {
+            # bundled tools on PATH
+            packages = with nixpkgs.lib; attrValues (filterAttrs (_: t: t != null) shell.configuration.tools);
             # only when interactive, so `nix develop -c <cmd>` still runs <cmd>
-            shellHook = ''[[ $- == *i* ]] && exec ${nixpkgs.lib.getExe shell}'';
+            shellHook = "[[ $- == *i* ]] && exec ${nixpkgs.lib.getExe shell}";
           };
         }
       );

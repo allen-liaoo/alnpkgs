@@ -32,6 +32,8 @@ in
       comma
       ;
     inherit nvimx;
+    # coil.nvim's standalone cli from nvimx's coil plugin
+    coil = nvimx.config.plugins.coil.package;
     inherit (pkgs)
       bat
       fd
