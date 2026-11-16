@@ -27,13 +27,13 @@
     ga = "git add";
     gb = "git branch";
     gch = "git checkout";
-    gc = "git commit -m";
+    gc = "git commit";
     gd = "git diff";
     gf = "git fetch";
     gp = "git push";
     gpl = "git pull";
     grb = "git rebase";
     gm = "git merge";
-    gl = "git log";
+    gl = "git log --oneline";
   };
 }
