@@ -9,11 +9,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1794792503,
-        "narHash": "sha256-PqG1Y9ec6/+RmpRTuLACWbShp4HUFDKUmuQyHU9B7js=",
+        "lastModified": 1794864080,
+        "narHash": "sha256-wUu7XjWc2h1jcDTk015weYh0D+F1AAVw8kxvIwWgoQA=",
         "owner": "allen-liaoo",
         "repo": "coil.nvim",
-        "rev": "3757f75d82a59a92713ab4f8fd317c43ed9e15b4",
+        "rev": "1c622770699a1032c814cf5b584852e17d9d2ea1",
         "type": "github"
       },
       "original": {
@@ -160,11 +160,11 @@
         "winresize": "winresize"
       },
       "locked": {
-        "lastModified": 1794792536,
-        "narHash": "sha256-tbxBAiwmy1BF/q0RDOljjRQzRfLn0ALy0uAP0X5GtXQ=",
+        "lastModified": 1794864437,
+        "narHash": "sha256-c0iQZs1p5BY+NyXno3edljVFBb+xJ5pkMFVudAyXVPU=",
         "owner": "allen-liaoo",
         "repo": "nvimx",
-        "rev": "e9e68ee278692562360fb2fbfec0a3eeafe817d0",
+        "rev": "605dcc94714c7ee32151ae269fcd8845448e651a",
         "type": "github"
       },
       "original": {
