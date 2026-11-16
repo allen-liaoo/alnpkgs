@@ -16,7 +16,7 @@ lib.pipe ./. [
     else 
       {
         name = lib.removeSuffix ".nix" n;
-        value = import ./${n} { inherit pkgs; };
+        value = pkgs.callPackage ./${n} { };
       }
   ))
 ]
