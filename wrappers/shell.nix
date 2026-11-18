@@ -33,7 +33,7 @@ in
       ;
     inherit nvimx;
     # coil.nvim's standalone cli from nvimx's coil plugin
-    coil = nvimx.config.plugins.coil.package;
+    coil = nvimx.config.plugins.coil.cli.package;
     inherit (pkgs)
       bat
       fd

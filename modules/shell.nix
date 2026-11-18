@@ -64,7 +64,7 @@ in
         coil.init = ''
           function cl
             set tmp (mktemp -t "coil-cwd.XXXXXX")
-            ${lib.getExe' config.tools.coil "coil"} --cwd-file "$tmp" $argv
+            ${lib.getExe config.tools.coil} --cwd-file "$tmp" $argv
             if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
               builtin cd -- "$cwd"
             end
