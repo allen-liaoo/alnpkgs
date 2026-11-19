@@ -67,9 +67,11 @@
 
       # vim-like pane navigation; h/l fall through to the adjacent window at the edge, H/L always switch window
       bind h if -F "#{pane_at_left}" previous-window "select-pane -L"
+      bind Left if -F "#{pane_at_left}" previous-window "select-pane -L"
       bind j select-pane -D
       bind k select-pane -U
       bind l if -F "#{pane_at_right}" next-window "select-pane -R"
+      bind Right if -F "#{pane_at_right}" next-window "select-pane -R"
       bind H previous-window
       bind L next-window
       bind -r M-h resize-pane -L 5
