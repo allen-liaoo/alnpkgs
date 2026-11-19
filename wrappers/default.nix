@@ -11,7 +11,7 @@ let
 in
 lib.pipe ./. [
   builtins.readDir
-  (lib.filterAttrs (n: t: n != "default.nix" && (t == "directory" || lib.hasSuffix ".nix" n)))
+  (lib.filterAttrs (n: t: n != "default.nix" && !(lib.hasPrefix "_" n) && (t == "directory" || lib.hasSuffix ".nix" n)))
   (lib.mapAttrs' (
     n: _:
     let

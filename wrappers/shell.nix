@@ -20,7 +20,6 @@ in
   tools = lib.mapAttrs (_: lib.mkDefault) {
     inherit (alnPkgs)
       starship
-      yazi # TODO: remove
       fastfetch
       btop
       lazygit
