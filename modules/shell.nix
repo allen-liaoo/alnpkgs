@@ -56,9 +56,9 @@ in
           VISUAL = "nvim";
         };
         nvimx.shellAliases = {
-          v = lib.getExe config.tools.nvimx;
-          vi = lib.getExe config.tools.nvimx;
-          vim = lib.getExe config.tools.nvimx;
+          v = "nvim";
+          vi = "nvim";
+          vim = "nvim";
         };
         # coil, then cd to its last directory on exit
         coil.init = ''
